@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <!-- Early Leave Views -->
+    <record id="view_device_form" model="ir.ui.view">
+        <field name="name">res.device.configuration.form</field>
+        <field name="model">res.device.configuration</field>
+        <field name="arch" type="xml">
+            <form string="Device">
+                <header>
+                    <button type="object" class="oe_highlight" string="Reset Draft" name="reset_draft" attrs="{'invisible':[('state','=','draft')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="device Id"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <h3>
+                        <label for="mac_id"/>
+                        <field name="mac_id"/>
+                        <br/>
+                        <label for="partner_id"/>
+                        <field name="partner_id" readonly="1"/><br/>
+                        <field name="active" widget="boolean_toggle"/>
+                    </h3>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_device_tree" model="ir.ui.view">
+        <field name="name">res.device.configuration.tree</field>
+        <field name="model">res.device.configuration</field>
+        <field name="arch" type="xml">
+            <tree string="Device">
+                <field name="name"/>
+                <field name="mac_id"/>
+                <field name="partner_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_res_device_search" model="ir.ui.view">
+        <field name="name">res.device.configuration.search</field>
+        <field name="model">res.device.configuration</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Filters -->
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+
+                <!-- Search Fields -->
+                <field name="name" string="Device"/>
+                <field name="mac_id" string="Mac ID"/>
+                <field name="partner_id" string="Customer"/>
+                <field name="state" string="State"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_device" model="ir.actions.act_window">
+        <field name="name">Device</field>
+        <field name="res_model">res.device.configuration</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_device" name="Devices" parent="contacts.res_partner_menu_config"
+              action="action_device" sequence="2"/>
+</odoo>

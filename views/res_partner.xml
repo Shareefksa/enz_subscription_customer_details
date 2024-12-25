@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_form_inherit_customer_code" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.customer.code</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="subscription_details" string="Subscripton">
+                    <group>
+                        <group>
+                            <field name="customer_code"/>
+                            <button name="action_generate_customer_code" type="object" string="Generate Code"
+                                    class="btn-primary" attrs="{'invisible':[('customer_code','!=', False)]}"/>
+                            <button name="sync_with_client_server" type="object" class="oe_highlight" string="Access Server"/>
+                        </group>
+                        <group>
+                            <field name="contact_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="server_link" placeholder="Eg : https://enzapps.com/"/>
+                            <field name="database_name" placeholder="Database Name"/>
+                            <field name="username" placeholder="Eg : user@gmail.com"/>
+                            <field name="password" placeholder="Eg : *********"/>
+                            <field name="subscription_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="no_of_days"/>
+                            <field name="device_line_ids" domain="[('state','=','draft')]">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="mac_id"/>
+                                </tree>
+                            </field>
+                            <field name="api_key"/>
+                            <field name="token"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_device_code" model="ir.sequence">
+            <field name="name">Device Code Sequence</field>
+            <field name="code">res.device.configuration.code</field>
+            <field name="prefix">57955</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False" />
+        </record>
+        <record id="seq_customer_code" model="ir.sequence">
+            <field name="name">Customer Code Sequence</field>
+            <field name="code">res.partner.customer.code</field>
+            <field name="prefix">CUST-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False" />
+        </record>
+    </data>
+</odoo>
